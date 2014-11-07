@@ -1,0 +1,87 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css' /x>
+
+	<title>Virtual Fridge</title>
+
+
+</head>
+
+<body>
+	
+<div id="container">
+		<div id="home" class="transparency">
+
+			<h1>Whats in the fridge?</h1>
+			<div id="serchdiv">
+				<input id="foodType" type="text" placeholder="Grocery item to search for?" />
+			</div>
+			<div id="options"  class="transparency">
+				<ul>
+					<li><button id="contentsCheck" class="myButton">Check Fridge</button></li>
+					<li><button id="takeOut" class="myButton">Remove Item</button></li>
+					<li><button id="putIn" class="myButton">Add Item</button></li>
+				</ul>
+			</div>
+<!-- Aim to refactor buttons out and replace with auto resizing divs
+
+			<div id="rfOptions" class="transparency">
+				<ul>
+					<li id="rfcontentCheck">Fridge Contents</li>
+					<li id="rftakeOut">Remove an Item</li>
+					<li id="rfputIn">add an item</li>
+				</ul>
+			</div>
+-->
+		</div>
+
+		<div id="output" class="transparency"></div>
+</div>
+
+	<script type="text/javascript">
+
+	var fridgeContents=new Array(); //integrate this with a database
+
+	fridgeContents[0]='Butter';
+	fridgeContents[1]='Chicken';
+	fridgeContents[2]='Ham';
+	fridgeContents[3]='Milk';
+	fridgeContents[4]='Lamb';
+	fridgeContents[5]='Blueberries';
+	fridgeContents[6]='Yogurt';
+
+
+	document.getElementById("contentsCheck").onclick=function() {
+		//add more functionality: ignore case, item accounting, shopping list
+		var a = fridgeContents.indexOf(document.getElementById("foodType").value);
+		if (a > -1) {
+		document.getElementById("output").innerHTML= "<p>There are [X] of [that item] in the fridge</p>"; 
+		} else {
+		document.getElementById("output").innerHTML= "<p>None available. [Do you want to add this item to a shopping list?]</p>"; 
+		}
+	}
+
+	document.getElementById("takeOut").onclick=function() {
+		var a = fridgeContents.indexOf(document.getElementById("foodType").value);
+		if (a > -1) {
+		fridgeContents.splice(a, 1);
+		document.getElementById("output").innerHTML= "<p>Item Removed</p>";
+		} else {
+		document.getElementById("output").innerHTML= "<p>Oops cant find that item</p>";	
+		}
+	//	console.log(fridgeContents);
+	}
+
+	document.getElementById("putIn").onclick=function() {
+		fridgeContents.push(document.getElementById("foodType").value);
+		document.getElementById("output").innerHTML= "<p>Item Added</p>";
+	//	console.log(fridgeContents);
+	}
+	</script>
+
+</body>
+</html>
